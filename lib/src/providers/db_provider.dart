@@ -95,4 +95,16 @@ class DBProvider{
 
     return list;
   }
+
+  //Update register
+  Future<int> updateScan(ScanModel scanModel) async{
+    final db = await database;
+
+    final response = await db.update('Scans', scanModel.toJson(), where: 'id = ?', whereArgs: [scanModel.id]);
+
+    return response;
+  }
+
+  //Delete registers
+
 }
