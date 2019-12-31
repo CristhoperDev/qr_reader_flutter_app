@@ -11,6 +11,7 @@ class ScansBloc {
 
   ScansBloc._internal() {
     //Get scan from database
+    getScans();
 
   }
 
@@ -20,5 +21,19 @@ class ScansBloc {
 
   dispose() {
     _scansController?.close();
+  }
+
+  getScans() async {
+    _scansController.sink.add( await DBProvider.db.getAllScan() );
+  }
+
+  deleteScan(int id) async {
+    await DBProvider.db.deleteScan(id);
+    getScans();
+  }
+
+  deleteAllScan() async {
+    await DBProvider.db.deleteAllScan();
+    getScans();
   }
 }
