@@ -80,7 +80,7 @@ class DBProvider{
 
     List<ScanModel> list =  response.isNotEmpty
                             ? response.map((scan) => ScanModel.fromJson(scan)).toList()
-                            : null;
+                            : [];
 
     return list;
   }
@@ -92,7 +92,7 @@ class DBProvider{
 
     List<ScanModel> list =  response.isNotEmpty
         ? response.map((scan) => ScanModel.fromJson(scan)).toList()
-        : null;
+        : [];
 
     return list;
   }
