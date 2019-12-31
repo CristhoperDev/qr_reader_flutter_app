@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:qr_reader_flutter_app/src/pages/directions_page.dart';
 import 'package:qr_reader_flutter_app/src/pages/maps_page.dart';
 
+import 'package:barcode_scan/barcode_scan.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -18,7 +20,7 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.delete_forever),
-            onPressed: () {},
+            onPressed: (){},
           )
         ],
       ),
@@ -27,10 +29,28 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
-        onPressed: () {},
+        onPressed: _scanQR,
         backgroundColor: Theme.of(context).primaryColor,
       ),
     );
+  }
+
+  _scanQR() async {
+    // https://cristhoper.dev
+    // geo:40.67425780940018,-73.96748915156252
+
+    String futureString = '';
+    try {
+      futureString = await BarcodeScanner.scan();
+    } catch (e) {
+      futureString = e.toString();
+    }
+    
+    print('Future String $futureString');
+    
+    if (futureString != null) {
+      print('Si hay informacion');
+    }  
   }
 
   Widget _callPage(int actualPage) {
