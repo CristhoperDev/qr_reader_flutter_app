@@ -35,13 +35,13 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
-        onPressed: _scanQR,
+        onPressed: () =>_scanQR(context),
         backgroundColor: Theme.of(context).primaryColor,
       ),
     );
   }
 
-  _scanQR() async {
+  _scanQR(BuildContext context) async {
     // https://cristhoper.dev
     // geo:40.67425780940018,-73.96748915156252
 
@@ -63,9 +63,9 @@ class _HomePageState extends State<HomePage> {
       
       if (Platform.isIOS) {
         Future.delayed(Duration(microseconds: 750));
-        utils.openScan(scan);
+        utils.openScan(context, scan);
       } else {
-        utils.openScan(scan);
+        utils.openScan(context, scan);
       }
 
     }
