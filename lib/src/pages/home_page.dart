@@ -3,6 +3,7 @@ import 'package:qr_reader_flutter_app/src/pages/directions_page.dart';
 import 'package:qr_reader_flutter_app/src/pages/maps_page.dart';
 
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:qr_reader_flutter_app/src/providers/db_provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -39,18 +40,18 @@ class _HomePageState extends State<HomePage> {
     // https://cristhoper.dev
     // geo:40.67425780940018,-73.96748915156252
 
-    String futureString = '';
+    String futureString = 'https://cristhoper.dev';
     /*try {
       futureString = await BarcodeScanner.scan();
     } catch (e) {
       futureString = e.toString();
-    }
-    
-    print('Future String $futureString');
-    
+    }*/
+
     if (futureString != null) {
-      print('Si hay informacion');
-    } */
+      final scan = ScanModel(value: futureString);
+      DBProvider.db.newScan(scan);
+
+    }
   }
 
   Widget _callPage(int actualPage) {
