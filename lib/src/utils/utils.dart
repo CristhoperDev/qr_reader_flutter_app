@@ -10,7 +10,6 @@ openScan(BuildContext context,ScanModel scanModel) async {
       throw 'Could not launch ${scanModel.value}';
     }
   } else {
-    print('GEO...');
     Navigator.pushNamed(context, '/map', arguments: scanModel);
   }
 }
