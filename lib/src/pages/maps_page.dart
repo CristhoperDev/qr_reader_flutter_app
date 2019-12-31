@@ -4,9 +4,11 @@ import 'package:qr_reader_flutter_app/src/models/scan_model.dart';
 import 'package:qr_reader_flutter_app/src/utils/utils.dart' as utils;
 
 class MapsPage extends StatelessWidget {
+  final scanBloc = new ScansBloc();
+
   @override
   Widget build(BuildContext context) {
-    final scanBloc = new ScansBloc();
+    scanBloc.getScans();
 
     return StreamBuilder<List<ScanModel>>(
       stream: scanBloc.scansStream,
