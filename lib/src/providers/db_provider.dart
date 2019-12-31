@@ -44,7 +44,7 @@ class DBProvider{
 
 
   // CREATE Register
-  newScanRaw(ScanModel scanModel) async {
+  Future<int> newScanRaw(ScanModel scanModel) async {
     final db = await database;
 
     final response = await db.rawInsert(
@@ -55,7 +55,7 @@ class DBProvider{
     return response;
   }
 
-  newScan(ScanModel scanModel) async{
+  Future<int> newScan(ScanModel scanModel) async{
     final db = await database;
 
     final response = await db.insert('Scans', scanModel.toJson());
@@ -106,5 +106,19 @@ class DBProvider{
   }
 
   //Delete registers
+  Future<int> deleteScan(int id) async {
+    final db = await database;
 
+    final response = await db.delete('Scans', where: 'id = ?', whereArgs: [id]);
+
+    return response;
+  }
+
+  Future<int> deleteAllScan(int id) async {
+    final db = await database;
+
+    final response = await db.rawDelete("DELETE FROM Scans");
+
+    return response;
+  }
 }
