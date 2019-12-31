@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     // geo:40.67425780940018,-73.96748915156252
 
     String futureString = '';
-    try {
+    /*try {
       futureString = await BarcodeScanner.scan();
     } catch (e) {
       futureString = e.toString();
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
     
     if (futureString != null) {
       print('Si hay informacion');
-    }  
+    } */
   }
 
   Widget _callPage(int actualPage) {
