@@ -45,25 +45,22 @@ class _HomePageState extends State<HomePage> {
     // https://cristhoper.dev
     // geo:40.67425780940018,-73.96748915156252
 
-    String futureString = 'https://cristhoper.dev';
-    /*try {
+    String futureString = '';
+    try {
       futureString = await BarcodeScanner.scan();
     } catch (e) {
       futureString = e.toString();
-    }*/
+    }
 
     if (futureString != null) {
       final scan = ScanModel(value: futureString);
       //DBProvider.db.newScan(scan);
       scanBloc.insertScan(scan);
-
-      final scan2 = ScanModel(value: 'geo:40.67425780940018,-73.96748915156252');
-      //DBProvider.db.newScan(scan);
-      scanBloc.insertScan(scan2);
       
       if (Platform.isIOS) {
-        Future.delayed(Duration(microseconds: 750));
-        utils.openScan(context, scan);
+        Future.delayed(Duration(microseconds: 750), () {
+          utils.openScan(context, scan);
+        });
       } else {
         utils.openScan(context, scan);
       }
