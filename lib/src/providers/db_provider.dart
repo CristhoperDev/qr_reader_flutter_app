@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:qr_reader_flutter_app/src/models/scan_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBProvider{
@@ -39,5 +40,26 @@ class DBProvider{
         );
       }
     );
+  }
+
+
+  // CREATE Register
+  newScanRaw(ScanModel scanModel) async {
+    final db = await database;
+
+    final response = await db.rawInsert(
+      "INSERT INTO Scans (id, type, value) "
+      "VALUES ( ${scanModel.id}, '${scanModel.type}', '${scanModel.value}' )"
+    );
+
+    return response;
+  }
+
+  newScan(ScanModel scanModel) async{
+    final db = await database;
+
+    final response = db.insert('Scans', scanModel.toJson());
+
+    return response;
   }
 }
